@@ -4,7 +4,7 @@ from uuid import uuid4 as uuid
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 
-
+#Base para la appi
 class Producto(BaseModel):
     id: Optional[str]
     nombre: str
@@ -30,7 +30,12 @@ def obtener_productos():
 
 @app.post('/producto')
 def crear_producto(producto: Producto):
+####################################################################################################
+# Un UUID es un identificador único. Corresponde a las siglas de Identificador Único Universal. 
+# Es un código de 16 bytes compuesto por 32 caracteres. Estos códigos o identificadores se usan para
+# identificar información que debe ser única y que no debe repetirse.    
     producto.id = str(uuid())
+####################################################################################################    
     productos.append(producto)
     return {'mensaje': 'Producto creado satisfactoriamente.'}
 
