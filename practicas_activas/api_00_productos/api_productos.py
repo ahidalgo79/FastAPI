@@ -40,15 +40,25 @@ def crear_producto(producto: Producto):
     return {'mensaje': 'Producto creado satisfactoriamente.'}
 
 #Ruta GET que Permite Buscar un Producto a partir de su ID
+#Búsqueda sobre una Lista con la Función Filter
 @app.get('/producto/{producto_id}')
 def obtener_producto_por_id(producto_id: str):
     resultado = list(filter(lambda p: p.id == producto_id, productos))
 
     if len(resultado):
         return resultado[0]
-    
+#############################################################################################################    
+# La función raise se usa para indicar que se ha producido un error o una condición excepcional. 
+# La información sobre el error se captura en un objeto de excepción.    
     raise HTTPException(status_code=404, detail=f'El producto con el ID {producto_id} no fue encontrado.')
+# Los códigos de estado de respuesta HTTP indican si se ha completado satisfactoriamente una solicitud HTTP específica. Las respuestas se agrupan en cinco clases:
+#    Respuestas informativas (100–199),
+#    Respuestas satisfactorias (200–299),
+#    Redirecciones (300–399),
+#    Errores de los clientes (400–499),
+#    y errores de los servidores (500–599).
 
+#############################################################################################################
 
 @app.delete('/producto/{producto_id}')
 def eliminar_producto_por_id(producto_id: str):
@@ -59,6 +69,9 @@ def eliminar_producto_por_id(producto_id: str):
         productos.remove(producto)
 
         return {'mensaje': f'El producto con ID {producto_id} fue eliminado.'}
+# 404 Not Found
+# El servidor no pudo encontrar el contenido solicitado. Este código de respuesta es uno de los más famosos dada su alta
+# ocurrencia en la web.
     
     raise HTTPException(status_code=404, detail=f'El producto con el ID {producto_id} no fue encontrado.')
 
