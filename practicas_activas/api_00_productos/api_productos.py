@@ -39,7 +39,7 @@ def crear_producto(producto: Producto):
     productos.append(producto)
     return {'mensaje': 'Producto creado satisfactoriamente.'}
 
-
+#Ruta GET que Permite Buscar un Producto a partir de su ID
 @app.get('/producto/{producto_id}')
 def obtener_producto_por_id(producto_id: str):
     resultado = list(filter(lambda p: p.id == producto_id, productos))
