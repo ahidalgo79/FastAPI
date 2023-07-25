@@ -1,21 +1,17 @@
-from datetime import datetime
+from fastapi import FastAPI
 from pydantic import BaseModel
 
 
-class User(BaseModel):
-    id: int
-    name = 'John Ortiz Ordoñez'
-    signup_ts: datetime | None = None
-    friends: list[int] = []
+class Item(BaseModel):
+    name: str
+    description: str | None = None
+    price: float
+    tax: float | None = None
 
 
-# Desde el exterior podríamos recibir estos datos:
-external_data = {
-    'id': 1001, 
-    'signup_ts': '2022-10-23 12:20', 
-    'friends': [1002, 1003, 1004]
-}
+app = FastAPI()
 
-user = User(**external_data)
-print(user)
-print(user.id)
+
+@app.post("/items/")
+async def create_item(item: Item):
+    return item
